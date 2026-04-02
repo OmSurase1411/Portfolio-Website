@@ -1,0 +1,1844 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Om Surase — AI & Big Data Engineer</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* === CSS VARIABLES === */
+        :root {
+            /* Light Theme */
+            --bg: #F8FAFC;
+            --bg-secondary: #F1F5F9;
+            --surface: #FFFFFF;
+            --text-main: #0F172A;
+            --text-muted: #475569;
+            --primary: #4F46E5;
+            --primary-hover: #4338CA;
+            --primary-bg: #E0E7FF;
+            --border: #E2E8F0;
+            --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.05), 0 4px 6px -4px rgb(0 0 0 / 0.05);
+        }
+
+        [data-theme="dark"] {
+            /* Dark Theme */
+            --bg: #0B1120;
+            --bg-secondary: #111827;
+            --surface: #1E293B;
+            --text-main: #F8FAFC;
+            --text-muted: #94A3B8;
+            --primary: #818CF8;
+            --primary-hover: #A5B4FC;
+            --primary-bg: rgba(129, 140, 248, 0.1);
+            --border: #334155;
+            --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.3), 0 2px 4px -2px rgb(0 0 0 / 0.3);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.3), 0 4px 6px -4px rgb(0 0 0 / 0.3);
+        }
+
+        /* === RESET & BASE === */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--text-main);
+            line-height: 1.6;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6, .nav-logo {
+            font-family: 'Outfit', sans-serif;
+            color: var(--text-main);
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* === TYPOGRAPHY === */
+        .section-label {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .section-label::before {
+            content: '';
+            width: 24px;
+            height: 2px;
+            background-color: var(--primary);
+            border-radius: 2px;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 2.75rem);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 3rem;
+            line-height: 1.2;
+        }
+
+        .section-title span {
+            color: var(--primary);
+        }
+
+        /* === LAYOUT === */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 6rem 2rem;
+        }
+
+        /* === NAVIGATION === */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: rgba(var(--bg), 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .nav-logo {
+            font-weight: 800;
+            font-size: 1.25rem;
+            letter-spacing: -0.02em;
+        }
+
+        .nav-logo span {
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text-muted);
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--primary);
+        }
+
+        .nav-controls {
+            display: flex;
+            gap: 0.75rem;
+            align-items: center;
+        }
+
+        .icon-btn {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 0.5rem;
+            color: var(--text-muted);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .icon-btn:hover {
+            color: var(--primary);
+            border-color: var(--primary);
+            background: var(--primary-bg);
+        }
+
+        .icon-btn span {
+            margin-left: 0.5rem;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+
+        #mobileMenuToggle {
+            display: none;
+        }
+
+        /* === BUTTONS === */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.875rem 1.75rem;
+            border-radius: 8px;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: #FFFFFF;
+            border: 1px solid var(--primary);
+            box-shadow: var(--shadow);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--text-main);
+            border: 1px solid var(--border);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            background-color: var(--primary-bg);
+        }
+
+        /* === HERO SECTION === */
+        #hero {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            align-items: center;
+            gap: 4rem;
+            padding-top: 6rem;
+        }
+
+        .hero-badges-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background-color: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 999px;
+            padding: 0.4rem 1rem;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #10B981;
+        }
+
+        .hero-badge-alt {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background-color: var(--primary-bg);
+            border: 1px solid rgba(129, 140, 248, 0.2);
+            border-radius: 999px;
+            padding: 0.4rem 1rem;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--primary);
+        }
+
+        .hero-badge-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #10B981;
+            box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
+            70% { box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 4vw, 4rem);
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -0.03em;
+            margin-bottom: 1rem;
+        }
+
+        .hero-title span {
+            color: var(--primary);
+        }
+
+        .hero-subtitle {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-desc {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            max-width: 500px;
+            margin-bottom: 2.5rem;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        /* === HERO SUMMARY BLOCKS === */
+        .hero-summary-blocks {
+            margin-top: 3rem;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            max-width: 500px;
+        }
+
+        .summary-block {
+            background-color: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.25rem 1.5rem;
+            box-shadow: var(--shadow);
+            transition: border-color 0.2s ease;
+        }
+        
+        .summary-block:hover {
+            border-color: var(--primary);
+        }
+
+        .summary-label {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .summary-label i {
+            color: var(--primary);
+        }
+
+        .summary-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .summary-tags .tag {
+            background-color: var(--bg);
+            border: 1px solid var(--border);
+            padding: 0.3rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            color: var(--text-main);
+            font-weight: 500;
+        }
+
+        .summary-text {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 0.25rem;
+        }
+
+        .summary-subtext {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .hero-visual {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .image-container {
+            position: relative;
+            width: 100%;
+            max-width: 380px;
+            height: auto;
+            aspect-ratio: 4/5;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border);
+            background-color: var(--surface);
+            margin: 0 auto;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center top;
+            transition: transform 0.5s ease;
+        }
+
+        .image-container:hover img {
+            transform: scale(1.03);
+        }
+
+        .stats-card {
+            position: absolute;
+            bottom: -20px;
+            left: -30px;
+            background: var(--surface);
+            padding: 1.5rem;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            gap: 2rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-num {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: var(--primary);
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            margin-top: 0.25rem;
+            font-weight: 600;
+        }
+
+        /* === ABOUT SECTION === */
+        #about { background-color: var(--bg-secondary); }
+        
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 4rem;
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+            color: var(--text-muted);
+        }
+
+        .about-text strong {
+            color: var(--text-main);
+            font-weight: 600;
+        }
+
+        /* Exact Sidebar Info Card Match */
+        .info-card {
+            background-color: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+        }
+
+        .info-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.25rem;
+            padding: 1.25rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .info-row:first-child {
+            padding-top: 0;
+        }
+
+        .info-row:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .info-icon {
+            color: var(--primary);
+            margin-top: 0.2rem;
+        }
+
+        .info-details {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .info-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            font-weight: 600;
+            line-height: 1;
+        }
+
+        .info-value {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--text-main);
+            line-height: 1.2;
+            word-break: break-word;
+        }
+
+        .info-value a:hover {
+            color: var(--primary);
+        }
+
+        .languages-section {
+            margin-top: 2rem;
+        }
+
+        .lang-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .lang-item {
+            background-color: var(--bg-secondary);
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+
+        .lang-name {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .lang-level {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 0.25rem;
+        }
+
+        /* === SKILLS SECTION === */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        /* Exact Match to "Technical Expertise" Screenshot */
+        .skill-card {
+            background-color: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+        }
+
+        .skill-icon {
+            width: 48px;
+            height: 48px;
+            background-color: var(--bg); /* Dark nested box */
+            color: var(--primary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .skill-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--text-main);
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .skill-tags .tag {
+            background-color: var(--bg); /* Dark pill */
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            padding: 0.35rem 1rem;
+            border-radius: 999px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        /* === TIMELINE (Experience & Education) === */
+        .timeline-section { background-color: var(--bg-secondary); }
+
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+            max-width: 800px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: var(--border);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-bottom: 3rem;
+        }
+
+        .timeline-item:last-child {
+            padding-bottom: 0;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: -2.45rem;
+            top: 0.25rem;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            border: 4px solid var(--surface);
+            box-shadow: 0 0 0 2px var(--border);
+        }
+
+        .timeline-date {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .timeline-title {
+            font-size: 1.25rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .timeline-subtitle {
+            font-size: 1rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .timeline-content {
+            color: var(--text-muted);
+        }
+
+        .timeline-list {
+            list-style-type: none;
+            margin-top: 1rem;
+        }
+
+        .timeline-list li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .timeline-list li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.6rem;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            opacity: 0.6;
+        }
+
+        /* === PROJECTS === */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background-color: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .project-year {
+            font-size: 0.8rem;
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 1rem;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .project-title {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-desc {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-top: 1.5rem;
+            font-size: 0.95rem;
+            word-break: break-all;
+        }
+
+        .project-link:hover {
+            color: var(--primary);
+        }
+
+        /* === CERTIFICATIONS & PUBLICATIONS === */
+        #certs { background-color: var(--bg-secondary); }
+
+        .certs-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+        }
+
+        .cert-item {
+            background-color: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            transition: border-color 0.2s ease;
+        }
+        
+        .cert-item:hover {
+            border-color: var(--primary);
+        }
+
+        .cert-icon {
+            color: var(--primary);
+            background-color: var(--primary-bg);
+            padding: 0.5rem;
+            border-radius: 8px;
+            display: flex;
+            flex-shrink: 0;
+        }
+
+        .cert-details h4 {
+            font-size: 1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .cert-details p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .cert-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            color: var(--text-main);
+            transition: color 0.2s ease;
+        }
+
+        .cert-link:hover {
+            color: var(--primary);
+        }
+
+        /* === CONTACT === */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .contact-links {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .contact-card {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            background-color: var(--surface);
+            border: 1px solid var(--border);
+            padding: 1.5rem;
+            border-radius: 12px;
+            transition: all 0.2s ease;
+            word-break: break-word;
+        }
+
+        .contact-card:hover {
+            border-color: var(--primary);
+            transform: translateX(5px);
+        }
+
+        .contact-card-icon {
+            width: 48px;
+            height: 48px;
+            background-color: var(--primary-bg);
+            color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .contact-card-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+        }
+
+        .contact-card-value {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--text-main);
+        }
+
+        .cta-box {
+            background-color: var(--primary-bg);
+            border: 1px solid var(--primary);
+            padding: 3rem;
+            border-radius: 24px;
+            text-align: center;
+        }
+
+        .cta-box h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta-box p {
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        /* === FOOTER === */
+        footer {
+            background-color: var(--bg-secondary);
+            border-top: 1px solid var(--border);
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .footer-text {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* === UTILITIES === */
+        .reveal {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.hidden {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* === MOBILE RESPONSIVENESS === */
+        @media (max-width: 968px) {
+            #hero {
+                grid-template-columns: 1fr;
+                text-align: center;
+                padding-top: 8rem;
+            }
+
+            .hero-badges-container {
+                justify-content: center;
+            }
+
+            .hero-cta {
+                justify-content: center;
+            }
+
+            .hero-desc, .hero-summary-blocks {
+                margin-left: auto;
+                margin-right: auto;
+            }
+            
+            .summary-block {
+                text-align: left;
+            }
+
+            .summary-tags {
+                justify-content: flex-start;
+            }
+
+            .hero-visual {
+                order: -1;
+                margin-bottom: 4rem; /* Added margin to prevent stat card overlap */
+            }
+
+            .stats-card {
+                left: 50%;
+                transform: translateX(-50%);
+                width: 90%;
+                justify-content: center;
+                bottom: -30px;
+            }
+
+            .about-grid, .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline {
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 4rem 1.25rem;
+            }
+
+            nav {
+                padding: 1rem;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background-color: var(--surface);
+                flex-direction: column;
+                padding: 2rem;
+                gap: 1.5rem;
+                border-bottom: 1px solid var(--border);
+                box-shadow: var(--shadow-lg);
+                transform: translateY(-150%);
+                transition: transform 0.3s ease;
+                opacity: 0;
+                visibility: hidden;
+            }
+
+            .nav-links.active {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+            }
+
+            #mobileMenuToggle {
+                display: flex;
+            }
+            
+            .projects-grid, .certs-list, .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-card {
+                flex-wrap: wrap;
+                gap: 1rem;
+                padding: 1.25rem;
+            }
+
+            .stat-item {
+                align-items: center;
+                text-align: center;
+            }
+
+            .hero-title {
+                font-size: 2.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-badge, .hero-badge-alt {
+                font-size: 0.75rem;
+                padding: 0.3rem 0.8rem;
+                text-align: center;
+                justify-content: center;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .hero-cta {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .info-row {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+
+            .lang-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-logo {
+                font-size: 1.1rem;
+            }
+            
+            .summary-block {
+                text-align: center;
+            }
+            
+            .summary-label {
+                justify-content: center;
+            }
+            
+            .summary-tags {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVIGATION -->
+    <nav>
+        <a href="#hero" class="nav-logo">Om<span>.</span>Surase</a>
+        
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#about" data-i18n="nav_about" class="nav-item">About</a></li>
+            <li><a href="#skills" data-i18n="nav_skills" class="nav-item">Skills</a></li>
+            <li><a href="#experience" data-i18n="nav_exp" class="nav-item">Experience</a></li>
+            <li><a href="#projects" data-i18n="nav_projects" class="nav-item">Projects</a></li>
+            <li><a href="#contact" data-i18n="nav_contact" class="nav-item">Contact</a></li>
+        </ul>
+
+        <div class="nav-controls">
+            <button class="icon-btn" id="langToggle" title="Toggle Language">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+                <span id="langLabel">EN</span>
+            </button>
+            <button class="icon-btn" id="themeToggle" title="Toggle Theme">
+                <svg id="themeIcon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+            </button>
+            <button class="icon-btn" id="mobileMenuToggle">
+                <svg id="menuIcon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+            </button>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section id="hero" class="container">
+        <div class="hero-text reveal">
+            <div class="hero-badges-container">
+                <div class="hero-badge">
+                    <div class="hero-badge-dot"></div>
+                    <span data-i18n="badge_werk">Available · 20 h/week (Working Student)</span>
+                </div>
+                <div class="hero-badge-alt">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+                    <span data-i18n="badge_intern">Open For Mandatory Internship from August</span>
+                </div>
+            </div>
+            
+            <h1 class="hero-title">
+                Om Rameshwar <br><span>Surase</span>
+            </h1>
+            
+            <div class="hero-subtitle" data-i18n="hero_role">
+                MSc in computer science ( Big Data & AI )
+            </div>
+            
+            <p class="hero-desc" data-i18n="hero_desc">
+                Building intelligent, scalable solutions that solve real-world problems. Specializing in AI agent architectures, LLM orchestration, and robust backend engineering.
+            </p>
+            
+            <div class="hero-cta">
+                <a href="#projects" class="btn btn-primary">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 20H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H20a2 2 0 0 1 2 2v5"/><circle cx="13" cy="12" r="2"/><path d="M18 19c-2.8 0-5-2.2-5-5v8"/><circle cx="20" cy="19" r="2"/></svg> <span data-i18n="cta_projects">View Projects</span>
+                </a>
+                <a href="#contact" class="btn btn-outline">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg> <span data-i18n="cta_contact">Get in Touch</span>
+                </a>
+                <a href="https://github.com/OmSurase1411" target="_blank" class="btn btn-outline" style="background-color: var(--surface);">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg> <span>GitHub ↗</span>
+                </a>
+            </div>
+
+            <!-- Hero Summaries (Core Stack & Education) -->
+            <div class="hero-summary-blocks">
+                <div class="summary-block">
+                    <span class="summary-label" data-i18n="quick_stack">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></svg> Core Stack
+                    </span>
+                    <div class="summary-tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">FastAPI</span>
+                        <span class="tag">OpenAI API</span>
+                        <span class="tag">Ollama</span>
+                        <span class="tag">RAG</span>
+                        <span class="tag">Agent Systems</span>
+                        <span class="tag">SQL</span>
+                        <span class="tag">Pandas</span>
+                        <span class="tag">Power BI</span>
+                        <span class="tag">GitHub</span>
+                    </div>
+                </div>
+                <div class="summary-block">
+                    <span class="summary-label" data-i18n="quick_edu">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg> Current Education
+                    </span>
+                    <div class="summary-text" data-i18n="edu1_degree_short">MSc Big Data & Artificial Intelligence</div>
+                    <div class="summary-subtext" data-i18n="quick_edu_sub">SRH Heidelberg · Expected 2027 · Germany</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="hero-visual reveal">
+            <div class="image-container">
+                <img src="/Portfolio website/photo.JPG" alt="Om Surase Professional Headshot" />
+            </div>
+            <div class="stats-card">
+                <div class="stat-item">
+                    <span class="stat-num">5+</span>
+                    <span class="stat-label" data-i18n="stat_projects">AI Projects</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-num">3</span>
+                    <span class="stat-label" data-i18n="stat_roles">Industry Roles</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-num">1.4</span>
+                    <span class="stat-label" data-i18n="stat_gpa">Grade</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section id="about" class="timeline-section">
+        <div class="container">
+            <div class="section-label" data-i18n="label_about">About Me</div>
+            <h2 class="section-title" data-i18n="title_about">Professional <span>Background</span></h2>
+            
+            <div class="about-grid reveal">
+                <div class="about-text">
+                    <p data-i18n="about_p1">I'm <strong>Om Rameshwar Surase</strong>, a Master's student in Computer Science specializing in Big Data and Artificial Intelligence at SRH University of Applied Sciences Heidelberg — currently based in Leipzig, Germany.</p>
+                    <p data-i18n="about_p2">My journey started in Electronics & Telecommunication Engineering, providing me with a strong foundation in systems thinking. This curiosity evolved into a deep passion for Artificial Intelligence, specifically in building systems where intelligent agents interact with real-world data in structured, measurable ways.</p>
+                    <p data-i18n="about_p3">Whether orchestrating LLMs locally with Ollama, building agentic backends using FastAPI, or performing statistical analysis on complex datasets, I thrive at the intersection where <strong>data meets intelligent design</strong>.</p>
+                </div>
+                
+                <div>
+                    <!-- Recreated exact sidebar match from image_70643c -->
+                    <div class="info-card">
+                        <div class="info-row">
+                            <div class="info-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></div>
+                            <div class="info-details">
+                                <span class="info-label" data-i18n="info_loc">LOCATION</span>
+                                <span class="info-value">Leipzig, Saxony, Germany</span>
+                            </div>
+                        </div>
+                        <div class="info-row">
+                            <div class="info-icon"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></div>
+                            <div class="info-details">
+                                <span class="info-label" data-i18n="info_email">EMAIL</span>
+                                <span class="info-value"><a href="mailto:omsurase72@gmail.com">omsurase72@gmail.com</a></span>
+                            </div>
+                        </div>
+                        <div class="info-row">
+                            <div class="info-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+                            </div>
+                            <div class="info-details">
+                                <span class="info-label">LINKEDIN</span>
+                                <span class="info-value"><a href="https://www.linkedin.com/in/om-surase" target="_blank">in/om-surase</a></span>
+                            </div>
+                        </div>
+                        <div class="info-row">
+                            <div class="info-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+                            </div>
+                            <div class="info-details">
+                                <span class="info-label">GITHUB</span>
+                                <span class="info-value"><a href="https://github.com/OmSurase1411" target="_blank">OmSurase1411</a></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="languages-section">
+                        <h4 class="section-label" style="font-size: 0.75rem;" data-i18n="label_languages">Languages</h4>
+                        <div class="lang-grid">
+                            <div class="lang-item">
+                                <div class="lang-name" data-i18n="lang_en">English</div>
+                                <div class="lang-level" data-i18n="lang_en_level">Fluent</div>
+                            </div>
+                            <div class="lang-item">
+                                <div class="lang-name" data-i18n="lang_de">German</div>
+                                <div class="lang-level">A2 Level</div>
+                            </div>
+                            <div class="lang-item">
+                                <div class="lang-name" data-i18n="lang_hi">Hindi</div>
+                                <div class="lang-level" data-i18n="lang_native">Native</div>
+                            </div>
+                            <div class="lang-item">
+                                <div class="lang-name" data-i18n="lang_mr">Marathi</div>
+                                <div class="lang-level" data-i18n="lang_native">Native</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SKILLS SECTION -->
+    <section id="skills" class="container">
+        <div class="section-label" data-i18n="label_skills">Core Competencies</div>
+        <h2 class="section-title" data-i18n="title_skills">Technical <span>Expertise</span></h2>
+        
+        <div class="skills-grid reveal">
+            <!-- Recreated exact card matches from image_70649c -->
+            <div class="skill-card">
+                <div class="skill-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 16 4-4-4-4"/><path d="m6 8-4 4 4 4"/><path d="m14.5 4-5 16"/></svg></div>
+                <h3 class="skill-title" data-i18n="skill_prog">Programming</h3>
+                <div class="skill-tags">
+                    <span class="tag">Python</span>
+                    <span class="tag">SQL</span>
+                    <span class="tag">C++</span>
+                </div>
+            </div>
+            
+            <div class="skill-card">
+                <div class="skill-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" x2="18" y1="20" y2="10"/><line x1="12" x2="12" y1="20" y2="4"/><line x1="6" x2="6" y1="20" y2="14"/></svg></div>
+                <h3 class="skill-title" data-i18n="skill_data">Data & Analytics</h3>
+                <div class="skill-tags">
+                    <span class="tag">Pandas</span>
+                    <span class="tag">NumPy</span>
+                    <span class="tag">EDA</span>
+                    <span class="tag">Statistical Testing</span>
+                    <span class="tag">Regression Modeling</span>
+                    <span class="tag">Power BI</span>
+                </div>
+            </div>
+            
+            <div class="skill-card">
+                <div class="skill-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/><path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"/><path d="M15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4"/><path d="M17.599 6.5a3 3 0 0 0 .399-1.375"/><path d="M6.003 5.125A3 3 0 0 0 6.401 6.5"/><path d="M3.477 10.896a4 4 0 0 1 .585-.396"/><path d="M19.938 10.5a4 4 0 0 1 .585.396"/><path d="M6 18a4 4 0 0 1-1.967-.516"/><path d="M19.967 17.484A4 4 0 0 1 18 18"/></svg></div>
+                <h3 class="skill-title" data-i18n="skill_ai">AI & Systems</h3>
+                <div class="skill-tags">
+                    <span class="tag">Agent Architecture</span>
+                    <span class="tag">LLM Orchestration</span>
+                    <span class="tag">Ollama</span>
+                    <span class="tag">OpenAI API</span>
+                    <span class="tag">RAG</span>
+                    <span class="tag">NLP</span>
+                </div>
+            </div>
+            
+            <div class="skill-card">
+                <div class="skill-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="8" x="2" y="2" rx="2" ry="2"/><rect width="20" height="8" x="2" y="14" rx="2" ry="2"/><line x1="6" x2="6.01" y1="6" y2="6"/><line x1="6" x2="6.01" y1="18" y2="18"/></svg></div>
+                <h3 class="skill-title" data-i18n="skill_backend">Backend & Cloud</h3>
+                <div class="skill-tags">
+                    <span class="tag">FastAPI</span>
+                    <span class="tag">REST APIs</span>
+                    <span class="tag">ASP.NET Core</span>
+                    <span class="tag">Azure AI Speech</span>
+                    <span class="tag">Azure Maps</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EXPERIENCE SECTION -->
+    <section id="experience" class="timeline-section">
+        <div class="container">
+            <div class="section-label" data-i18n="label_exp">Career Journey</div>
+            <h2 class="section-title" data-i18n="title_exp">Professional <span>Experience</span></h2>
+            
+            <div class="timeline reveal">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date" data-i18n="exp1_date">Apr 2025 – Aug 2025 · Pune, India</div>
+                    <h3 class="timeline-title" data-i18n="exp1_role">Associate Fiber Engineer</h3>
+                    <div class="timeline-subtitle">Amdocs</div>
+                    <div class="timeline-content">
+                        <ul class="timeline-list">
+                            <li data-i18n="exp1_b1">Developed detailed fiber-optic network permit drawings using AutoCAD and GIS tools, ensuring engineering-level precision and regulatory compliance.</li>
+                            <li data-i18n="exp1_b2">Designed and optimized fiber routes through feasibility analysis, supporting cost-effective outside-plant (OSP) engineering solutions.</li>
+                            <li data-i18n="exp1_b3">Coordinated with city agencies, utility providers, and construction teams to secure work permits.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date" data-i18n="exp2_date">Oct 2024 – Feb 2025 · Aurangabad, India</div>
+                    <h3 class="timeline-title" data-i18n="exp2_role">IT Support Specialist</h3>
+                    <div class="timeline-subtitle">Kunal Electrical Services</div>
+                    <div class="timeline-content">
+                        <ul class="timeline-list">
+                            <li data-i18n="exp2_b1">Provided technical support for software, hardware, and network-related issues, minimizing downtime and ensuring smooth daily operations.</li>
+                            <li data-i18n="exp2_b2">Assisted with system installations, updates, IT asset inventory management, and user training during IT deployment projects.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date" data-i18n="exp3_date">Aug 2024 – Oct 2024 · Pune, India</div>
+                    <h3 class="timeline-title" data-i18n="exp3_role">Associate Process Executive</h3>
+                    <div class="timeline-subtitle">NVIDIA</div>
+                    <div class="timeline-content">
+                        <ul class="timeline-list">
+                            <li data-i18n="exp3_b1">Annotated and validated datasets for autonomous driving AI models, ensuring 98% accuracy and reliable downstream analytics.</li>
+                            <li data-i18n="exp3_b2">Ensured data quality and labeling consistency for ML training pipelines, adhering strictly to structured QA processes.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section-label" style="margin-top: 5rem;" data-i18n="label_edu">Academic Background</div>
+            <h2 class="section-title" data-i18n="title_edu">Education <span>History</span></h2>
+            
+            <div class="timeline reveal">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">Oct 2025 – Present · Leipzig, Germany</div>
+                    <h3 class="timeline-title" data-i18n="edu1_degree">M.Sc. Computer Science (Big Data & Artificial Intelligence)</h3>
+                    <div class="timeline-subtitle">SRH University of Applied Sciences</div>
+                    <div class="timeline-content">
+                        <p>Grade: 1.4</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">Jul 2020 – Jul 2024 · Pune, India</div>
+                    <h3 class="timeline-title" data-i18n="edu2_degree">B.E. Electronics and Telecommunication</h3>
+                    <div class="timeline-subtitle">D. Y. Patil College of Engineering (DYPCOE)</div>
+                    <div class="timeline-content">
+                        <p>CGPA: 8/10 (German Grade: 2.0)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROJECTS SECTION -->
+    <section id="projects" class="container">
+        <div class="section-label" data-i18n="label_projects">Portfolio</div>
+        <h2 class="section-title" data-i18n="title_projects">Featured <span>Projects</span></h2>
+        
+        <div class="projects-grid reveal">
+            <div class="project-card">
+                <div class="project-year">2026 · AI Backend Architecture</div>
+                <h3 class="project-title" data-i18n="proj1_title">Agent Tool Server</h3>
+                <p class="project-desc" data-i18n="proj1_desc">Developed an agent-based backend system enabling AI to reason and execute tasks using locally hosted LLMs via Ollama. Built with a modular architecture separating agent logic, tool execution, and orchestration using FastAPI.</p>
+                <div class="skill-tags" style="margin-bottom: 1rem;">
+                    <span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">Ollama</span>
+                </div>
+                <a href="https://github.com/OmSurase1411" target="_blank" class="project-link">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg> <span data-i18n="view_github">View Repository</span>
+                </a>
+            </div>
+
+            <div class="project-card">
+                <div class="project-year">2026 · Microsoft AI Hackathon</div>
+                <h3 class="project-title" data-i18n="proj2_title">Smart City Emergency Platform</h3>
+                <p class="project-desc" data-i18n="proj2_desc">Built a multi-agent AI platform for real-time emergency detection and intelligent dispatch. Integrated Azure OpenAI GPT-4o, Azure Vision, and Speech agents to process multi-modal inputs into structured incident reports.</p>
+                <div class="skill-tags" style="margin-bottom: 1rem;">
+                    <span class="tag">Azure AI</span><span class="tag">C# .NET</span><span class="tag">Blazor</span>
+                </div>
+                <a href="https://github.com/nchaubey12/AI-Smart-City-Emergency-Coordination-Platform" target="_blank" class="project-link">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg> <span data-i18n="view_github">View Repository</span>
+                </a>
+            </div>
+
+            <div class="project-card">
+                <div class="project-year">2026 · Data Analytics</div>
+                <h3 class="project-title" data-i18n="proj3_title">Mindfuel Analysis</h3>
+                <p class="project-desc" data-i18n="proj3_desc">Analyzed heterogeneous datasets to study AI adoption trends and workforce impact. Performed thorough EDA and applied statistical techniques including correlation analysis, regression modeling, and ANOVA.</p>
+                <div class="skill-tags" style="margin-bottom: 1rem;">
+                    <span class="tag">Pandas</span><span class="tag">NumPy</span><span class="tag">Statistics</span>
+                </div>
+                <a href="https://github.com/AryaTamhane18/MindFuel_Analysis" target="_blank" class="project-link">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg> <span data-i18n="view_github">View Repository</span>
+                </a>
+            </div>
+
+            <div class="project-card">
+                <div class="project-year">2025 · NLP & Automation</div>
+                <h3 class="project-title" data-i18n="proj4_title">Jarvis Voice Assistant</h3>
+                <p class="project-desc" data-i18n="proj4_desc">Built a Python-based voice assistant capable of executing tasks using speech commands. Integrated NLP pipelines for intent detection, enabling real-time data retrieval and hands-free system control.</p>
+                <div class="skill-tags" style="margin-bottom: 1rem;">
+                    <span class="tag">Python</span><span class="tag">NLP</span><span class="tag">Automation</span>
+                </div>
+                <a href="https://github.com/OmSurase1411/Jarvis-Virtual-Desktop-Assistant" target="_blank" class="project-link">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg> <span data-i18n="view_github">View Repository</span>
+                </a>
+            </div>
+            
+            <div class="project-card">
+                <div class="project-year">2025 · NLP & Automation</div>
+                <h3 class="project-title" data-i18n="proj5_title">Auto-Reply AI Chatbot</h3>
+                <p class="project-desc" data-i18n="proj5_desc">Developed an AI chatbot to generate automated, human-like replies using GPT models. Improved maintainability through clean backend architecture and modular design, allowing seamless workflow integration.</p>
+                <div class="skill-tags" style="margin-bottom: 1rem;">
+                    <span class="tag">Python</span><span class="tag">GPT</span><span class="tag">Backend</span>
+                </div>
+                <a href="https://github.com/OmSurase1411/Autoreply-AI-Chatbot" target="_blank" class="project-link">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg> <span data-i18n="view_github">View Repository</span>
+                </a>
+            </div>
+            <div class="project-card">
+             <div class="project-year">2024 · IoT & Smart Systems</div>
+            
+             <h3 class="project-title">Load Defender</h3>
+            
+              <p class="project-desc">
+                Developed an intelligent system to detect and prevent overloading in trucks and wagons using sensor-based monitoring and real-time data processing. Designed to improve transportation safety, reduce structural damage, and ensure regulatory compliance.
+             </p>
+            
+                <div class="skill-tags" style="margin-bottom: 1rem;">
+             <span class="tag">IoT</span>
+             <span class="tag">Sensors</span>
+                <span class="tag">Data Processing</span>
+                <span class="tag">Automation</span>
+            </div>
+        
+            <a href="#" target="_blank" class="project-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5-.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/>
+                </svg>
+                <span>View Details</span>
+            </a>
+        </div>
+        </div>
+    </section>
+
+    <!-- CERTIFICATIONS & PUBLICATIONS -->
+    <section id="certs">
+        <div class="container">
+            <div class="section-label" data-i18n="label_certs">Continuous Learning</div>
+            <h2 class="section-title" data-i18n="title_certs">Certifications & <span>Publications</span></h2>
+            
+            <div class="certs-list reveal">
+                <div class="cert-item">
+                    <div class="cert-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg></div>
+                    <div class="cert-details">
+                        <h4>
+                            <a href="#" target="_blank" class="cert-link" rel="noopener noreferrer">
+                                <span data-i18n="cert1">Complete 2025 Python Bootcamp</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>
+                            </a>
+                        </h4>
+                        <p>Learn Python from Scratch</p>
+                    </div>
+                </div>
+                <div class="cert-item">
+                    <div class="cert-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg></div>
+                    <div class="cert-details">
+                        <h4>
+                            <a href="#" target="_blank" class="cert-link" rel="noopener noreferrer">
+                                <span data-i18n="cert2">Introduction to Artificial Intelligence</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>
+                            </a>
+                        </h4>
+                        <p>Fundamental Concepts & Applications</p>
+                    </div>
+                </div>
+                <div class="cert-item">
+                    <div class="cert-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg></div>
+                    <div class="cert-details">
+                        <h4>
+                            <a href="#" target="_blank" class="cert-link" rel="noopener noreferrer">
+                                <span data-i18n="cert3">SQL Programming Basics</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>
+                            </a>
+                        </h4>
+                        <p>Data Querying & Management</p>
+                    </div>
+                </div>
+                <div class="cert-item">
+                    <div class="cert-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/><line x1="10" x2="8" y1="9" y2="9"/></svg></div>
+                    <div class="cert-details">
+                        <h4>
+                            <a href="#" target="_blank" class="cert-link" rel="noopener noreferrer">
+                                <span data-i18n="pub1">LOAD DEFENDER</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>
+                            </a>
+                        </h4>
+                        <p>Publication: Solution for Overloaded Trucks and Wagons</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="container">
+        <div class="section-label" data-i18n="label_contact">Get In Touch</div>
+        <h2 class="section-title" data-i18n="title_contact">Let's <span>Connect</span></h2>
+        
+        <div class="contact-grid reveal">
+            <div>
+                <p data-i18n="contact_text" style="color: var(--text-muted); font-size: 1.1rem; margin-bottom: 2rem;">
+                    Whether you are looking for a motivated Werkstudent, want to collaborate on a data-driven project, or simply wish to discuss AI architectures — I would be delighted to hear from you.
+                </p>
+                
+                <div class="contact-links">
+                    <a href="mailto:omsurase72@gmail.com" class="contact-card">
+                        <div class="contact-card-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                        </div>
+                        <div>
+                            <div class="contact-card-label">EMAIL</div>
+                            <div class="contact-card-value">omsurase72@gmail.com</div>
+                        </div>
+                    </a>
+                    
+                    <a href="https://www.linkedin.com/in/om-surase" target="_blank" class="contact-card">
+                        <div class="contact-card-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+                        </div>
+                        <div>
+                            <div class="contact-card-label">LinkedIn</div>
+                            <div class="contact-card-value">linkedin.com/in/om-surase</div>
+                        </div>
+                    </a>
+                    
+                    <a href="https://github.com/OmSurase1411" target="_blank" class="contact-card">
+                        <div class="contact-card-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+                        </div>
+                        <div>
+                            <div class="contact-card-label">GitHub</div>
+                            <div class="contact-card-value">OmSurase1411</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="cta-box">
+                <h3 data-i18n="cta_title">Available for Werkstudent</h3>
+                <p data-i18n="cta_sub">Leipzig, Germany · Remote possible · Open for Mandatory Internship from August</p>
+                <a href="mailto:omsurase72@gmail.com" class="btn btn-primary">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+                    <span data-i18n="cta_email">Send an Email</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container footer-content" style="padding: 0;">
+            <div class="nav-logo" style="font-size: 1.5rem;">Om<span>.</span>Surase</div>
+            <p class="footer-text">© 2026 Om Rameshwar Surase. Based in Leipzig, Germany.</p>
+        </div>
+    </footer>
+
+    <script>
+
+        // === THEME TOGGLE ===
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const htmlEl = document.documentElement;
+        
+        let isDark = true; // Started with Dark theme
+
+        const moonSVG = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>`;
+        const sunSVG = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>`;
+        
+        themeToggle.addEventListener('click', () => {
+            isDark = !isDark;
+            htmlEl.setAttribute('data-theme', isDark ? 'dark' : 'light');
+            themeToggle.innerHTML = (isDark ? moonSVG : sunSVG);
+        });
+
+        // === MOBILE MENU ===
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const navLinks = document.getElementById('navLinks');
+        const menuIcon = document.getElementById('menuIcon');
+        const navItems = document.querySelectorAll('.nav-item');
+
+        let isMenuOpen = false;
+
+        function toggleMenu() {
+            isMenuOpen = !isMenuOpen;
+            navLinks.classList.toggle('active');
+            const menuSVG = `<svg id="menuIcon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="18" y2="18"/></svg>`;
+            const closeSVG = `<svg id="menuIcon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>`;
+            document.getElementById('menuIcon').outerHTML = isMenuOpen ? closeSVG : menuSVG;
+        }
+
+        mobileMenuToggle.addEventListener('click', toggleMenu);
+
+        navItems.forEach(item => {
+            item.addEventListener('click', () => {
+                if(isMenuOpen) toggleMenu();
+            });
+        });
+
+        // === SCROLL REVEAL ===
+        const reveals = document.querySelectorAll('.reveal');
+        const revealOptions = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
+
+        // Add hidden class to non-hero elements for animation
+        reveals.forEach(reveal => {
+            if (!reveal.closest('#hero')) {
+                reveal.classList.add('hidden');
+            }
+        });
+
+        const revealOnScroll = new IntersectionObserver(function(entries, observer) {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                entry.target.classList.remove('hidden');
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            });
+        }, revealOptions);
+
+        reveals.forEach(reveal => revealOnScroll.observe(reveal));
+
+        // === ACTIVE NAV HIGHLIGHT ===
+        const sections = document.querySelectorAll('section');
+        
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (scrollY >= sectionTop - 150) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navItems.forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('href') === `#${current}`) {
+                    item.classList.add('active');
+                }
+            });
+        });
+
+        // === TRANSLATIONS (i18n) ===
+        let currentLang = 'en';
+        const langToggle = document.getElementById('langToggle');
+        const langLabel = document.getElementById('langLabel');
+
+        const translations = {
+            en: {
+                nav_about: 'About', nav_skills: 'Skills', nav_exp: 'Experience', nav_projects: 'Projects', nav_contact: 'Contact',
+                badge_werk: 'Available · 20 h/week (Working Student)', badge_intern: 'Open For Mandatory Internship from August',
+                hero_role: 'MSc in computer science ( Big Data & AI )',
+                quick_stack: '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></svg> Core Stack', 
+                quick_edu: '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg> Current Education',
+                edu1_degree_short: 'MSc Big Data & Artificial Intelligence',
+                quick_edu_sub: 'SRH Heidelberg · Expected 2027 · Germany',
+                hero_desc: 'Building intelligent, scalable solutions that solve real-world problems. Specializing in AI agent architectures, LLM orchestration, and robust backend engineering.',
+                cta_projects: 'View Projects', cta_contact: 'Get in Touch',
+                stat_projects: 'AI Projects', stat_roles: 'Industry Roles', stat_gpa: 'German Grade',
+                label_about: 'About Me', title_about: 'Professional <span>Background</span>',
+                about_p1: "I'm <strong>Om Rameshwar Surase</strong>, a Master's student in Computer Science specializing in Big Data and Artificial Intelligence at SRH University of Applied Sciences Heidelberg — currently based in Leipzig, Germany.",
+                about_p2: "My journey started in Electronics & Telecommunication Engineering, providing me with a strong foundation in systems thinking. This curiosity evolved into a deep passion for Artificial Intelligence, specifically in building systems where intelligent agents interact with real-world data in structured, measurable ways.",
+                about_p3: "Whether orchestrating LLMs locally with Ollama, building agentic backends using FastAPI, or performing statistical analysis on complex datasets, I thrive at the intersection where <strong>data meets intelligent design</strong>.",
+                info_loc: 'Location', info_email: 'Email', 
+                label_languages: 'Languages', lang_en: 'English', lang_en_level: 'Fluent', lang_de: 'German', lang_hi: 'Hindi', lang_mr: 'Marathi', lang_native: 'Native',
+                label_skills: 'Core Competencies', title_skills: 'Technical <span>Expertise</span>',
+                skill_prog: 'Programming', skill_data: 'Data & Analytics', skill_ai: 'AI & Systems', skill_backend: 'Backend & Cloud',
+                label_exp: 'Career Journey', title_exp: 'Professional <span>Experience</span>',
+                exp1_date: 'Apr 2025 – Aug 2025 · Pune, India', exp1_role: 'Associate Fiber Engineer',
+                exp1_b1: 'Developed detailed fiber-optic network permit drawings using AutoCAD and GIS tools, ensuring engineering-level precision and regulatory compliance.',
+                exp1_b2: 'Designed and optimized fiber routes through feasibility analysis, supporting cost-effective outside-plant (OSP) engineering solutions.',
+                exp1_b3: 'Coordinated with city agencies, utility providers, and construction teams to secure work permits.',
+                exp2_date: 'Oct 2024 – Feb 2025 · Aurangabad, India', exp2_role: 'IT Support Specialist',
+                exp2_b1: 'Provided technical support for software, hardware, and network-related issues, minimizing downtime and ensuring smooth daily operations.',
+                exp2_b2: 'Assisted with system installations, updates, IT asset inventory management, and user training during IT deployment projects.',
+                exp3_date: 'Aug 2024 – Oct 2024 · Pune, India', exp3_role: 'Associate Process Executive',
+                exp3_b1: 'Annotated and validated datasets for autonomous driving AI models, ensuring 98% accuracy and reliable downstream analytics.',
+                exp3_b2: 'Ensured data quality and labeling consistency for ML training pipelines, adhering strictly to structured QA processes.',
+                label_edu: 'Academic Background', title_edu: 'Education <span>History</span>',
+                edu1_degree: 'M.Sc. Computer Science (Big Data & Artificial Intelligence)',
+                edu2_degree: 'B.E. Electronics and Telecommunication',
+                label_projects: 'Portfolio', title_projects: 'Featured <span>Projects</span>',
+                proj1_title: 'Agent Tool Server', proj1_desc: 'Developed an agent-based backend system enabling AI to reason and execute tasks using locally hosted LLMs via Ollama. Built with a modular architecture separating agent logic, tool execution, and orchestration using FastAPI.',
+                proj2_title: 'Smart City Emergency Platform', proj2_desc: 'Built a multi-agent AI platform for real-time emergency detection and intelligent dispatch. Integrated Azure OpenAI GPT-4o, Azure Vision, and Speech agents to process multi-modal inputs into structured incident reports.',
+                proj3_title: 'Mindfuel Analysis', proj3_desc: 'Analyzed heterogeneous datasets to study AI adoption trends and workforce impact. Performed thorough EDA and applied statistical techniques including correlation analysis, regression modeling, and ANOVA.',
+                proj4_title: 'Jarvis Voice Assistant', proj4_desc: 'Built a Python-based voice assistant capable of executing tasks using speech commands. Integrated NLP pipelines for intent detection, enabling real-time data retrieval and hands-free system control.',
+                proj5_title: 'Auto-Reply AI Chatbot', proj5_desc: 'Developed an AI chatbot to generate automated, human-like replies using GPT models. Improved maintainability through clean backend architecture and modular design, allowing seamless workflow integration.',
+                view_github: 'View Repository',
+                label_certs: 'Continuous Learning', title_certs: 'Certifications & <span>Publications</span>',
+                cert1: 'Complete 2025 Python Bootcamp', cert2: 'Introduction to Artificial Intelligence',
+                cert3: 'SQL Programming Basics', pub1: 'LOAD DEFENDER',
+                label_contact: 'Get In Touch', title_contact: "Let's <span>Connect</span>",
+                contact_text: "Whether you are looking for a motivated Werkstudent, want to collaborate on a data-driven project, or simply wish to discuss AI architectures — I would be delighted to hear from you.",
+                cta_title: 'Available for Werkstudent', cta_sub: 'Leipzig, Germany · Remote possible · Open for Mandatory Internship from August', cta_email: 'Send an Email'
+            },
+            de: {
+                nav_about: 'Über mich', nav_skills: 'Fähigkeiten', nav_exp: 'Erfahrung', nav_projects: 'Projekte', nav_contact: 'Kontakt',
+                badge_werk: 'Verfügbar · 20 h/Woche (Werkstudent)', badge_intern: 'Offen für Pflichtpraktikum ab August',
+                hero_role: 'MSc in computer science ( Big Data & AI )',
+                quick_stack: '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></svg> Core Stack', 
+                quick_edu: '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg> Aktuelle Ausbildung',
+                edu1_degree_short: 'MSc Big Data & Künstliche Intelligenz',
+                quick_edu_sub: 'SRH Heidelberg · Voraussichtlich 2027 · Deutschland',
+                hero_desc: 'Entwicklung intelligenter, skalierbarer Lösungen für reale Probleme. Spezialisiert auf KI-Agenten-Architekturen, LLM-Orchestrierung und robustes Backend-Engineering.',
+                cta_projects: 'Projekte ansehen', cta_contact: 'Kontakt aufnehmen',
+                stat_projects: 'KI-Projekte', stat_roles: 'Berufliche Stationen', stat_gpa: 'Deutsche Note',
+                label_about: 'Über mich', title_about: 'Beruflicher <span>Werdegang</span>',
+                about_p1: "Ich bin <strong>Om Rameshwar Surase</strong>, Masterstudent der Informatik mit Schwerpunkt Big Data und Künstliche Intelligenz an der SRH Hochschule Heidelberg – derzeit ansässig in Leipzig, Deutschland.",
+                about_p2: "Meine Reise begann in der Elektronik- und Telekommunikationstechnik, was mir ein starkes Fundament im Systemdenken verlieh. Diese Neugier entwickelte sich zu einer tiefen Leidenschaft für Künstliche Intelligenz, insbesondere für den Aufbau von Systemen, in denen intelligente Agenten strukturiert mit realen Daten interagieren.",
+                about_p3: "Ob ich LLMs lokal mit Ollama orchestriere, agentenbasierte Backends mit FastAPI entwickle oder statistische Analysen komplexer Datensätze durchführe – ich blühe dort auf, wo <strong>Daten auf intelligentes Design treffen</strong>.",
+                info_loc: 'Standort', info_email: 'E-Mail', 
+                label_languages: 'Sprachen', lang_en: 'Englisch', lang_en_level: 'Fließend', lang_de: 'Deutsch', lang_hi: 'Hindi', lang_mr: 'Marathi', lang_native: 'Muttersprache',
+                label_skills: 'Kernkompetenzen', title_skills: 'Technische <span>Expertise</span>',
+                skill_prog: 'Programmierung', skill_data: 'Daten & Analytik', skill_ai: 'KI & Systeme', skill_backend: 'Backend & Cloud',
+                label_exp: 'Karriereweg', title_exp: 'Berufliche <span>Erfahrung</span>',
+                exp1_date: 'Apr 2025 – Aug 2025 · Pune, Indien', exp1_role: 'Associate Fiber Engineer',
+                exp1_b1: 'Entwicklung detaillierter Genehmigungszeichnungen für Glasfasernetze mit AutoCAD und GIS-Tools zur Sicherstellung von Präzision und Einhaltung von Vorschriften.',
+                exp1_b2: 'Planung und Optimierung von Glasfaserstrecken durch Machbarkeitsanalysen zur Unterstützung kosteneffizienter technischer Lösungen.',
+                exp1_b3: 'Koordination mit städtischen Behörden, Versorgungsunternehmen und Bauteams zur Einholung von Arbeitsgenehmigungen.',
+                exp2_date: 'Okt 2024 – Feb 2025 · Aurangabad, Indien', exp2_role: 'IT-Support-Spezialist',
+                exp2_b1: 'Technischer Support bei Software-, Hardware- und Netzwerkproblemen, Minimierung von Ausfallzeiten und Sicherstellung reibungsloser Abläufe.',
+                exp2_b2: 'Unterstützung bei Systeminstallationen, Updates, IT-Asset-Management und Benutzerschulungen.',
+                exp3_date: 'Aug 2024 – Okt 2024 · Pune, Indien', exp3_role: 'Associate Process Executive',
+                exp3_b1: 'Annotation und Validierung von Datensätzen für autonome Fahr-KI-Modelle mit 98% Genauigkeit.',
+                exp3_b2: 'Sicherstellung von Datenqualität und Labeling-Konsistenz für ML-Trainingspipelines.',
+                label_edu: 'Akademischer Hintergrund', title_edu: 'Ausbildungs<span>historie</span>',
+                edu1_degree: 'M.Sc. Informatik (Big Data & Künstliche Intelligenz)',
+                edu2_degree: 'B.E. Elektronik & Telekommunikation',
+                label_projects: 'Portfolio', title_projects: 'Ausgewählte <span>Projekte</span>',
+                proj1_title: 'Agent Tool Server', proj1_desc: 'Entwicklung eines agentenbasierten Backend-Systems, das KI ermöglicht, Aufgaben mit lokal gehosteten LLMs via Ollama auszuführen. Modulare Architektur mit FastAPI.',
+                proj2_title: 'Smart City Notfall-Plattform', proj2_desc: 'Multi-Agenten-KI-Plattform zur Echtzeit-Erkennung von Notfällen. Integration von Azure OpenAI GPT-4o, Azure Vision und Speech-Agenten.',
+                proj3_title: 'Mindfuel Analyse', proj3_desc: 'Analyse heterogener Datensätze zu KI-Adoptionstrends und Arbeitsmarktauswirkungen. Umfassende EDA und statistische Techniken wie ANOVA und Regressionsmodellierung.',
+                proj4_title: 'Jarvis Sprachassistent', proj4_desc: 'Ein Python-basierter Sprachassistent zur Aufgabenausführung über Sprachbefehle. Integrierte NLP-Pipelines für die Absichtserkennung.',
+                proj5_title: 'Auto-Reply KI-Chatbot', proj5_desc: 'KI-Chatbot für automatisierte Antworten mit GPT-Modellen. Fokus auf saubere Backend-Architektur und modularem Design.',
+                view_github: 'Repository ansehen',
+                label_certs: 'Weiterbildung', title_certs: 'Zertifikate & <span>Publikationen</span>',
+                cert1: 'Kompletter Python-Bootcamp 2025', cert2: 'Einführung in Künstliche Intelligenz',
+                cert3: 'SQL-Programmiergrundlagen', pub1: 'LOAD DEFENDER',
+                label_contact: 'Kontakt aufnehmen', title_contact: "Lassen Sie uns <span>vernetzen</span>",
+                contact_text: "Ob Sie einen motivierten Werkstudenten suchen, an einem datengetriebenen Projekt zusammenarbeiten möchten oder einfach über KI-Architekturen sprechen wollen — ich freue mich darauf, von Ihnen zu hören.",
+                cta_title: 'Verfügbar als Werkstudent', cta_sub: 'Leipzig, Deutschland · Remote möglich · Offen für Pflichtpraktikum ab August', cta_email: 'E-Mail senden'
+            }
+        };
+
+        function updateContent(lang) {
+            const t = translations[lang];
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (t[key]) el.innerHTML = t[key];
+            });
+        }
+
+        langToggle.addEventListener('click', () => {
+            currentLang = currentLang === 'en' ? 'de' : 'en';
+            langLabel.textContent = currentLang.toUpperCase();
+            updateContent(currentLang);
+        });
+
+    </script>
+</body>
+</html>
